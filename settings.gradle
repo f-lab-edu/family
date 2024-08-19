@@ -1,0 +1,5 @@
+rootProject.name = 'Family'
+
+include 'module-stream'
+include 'module-api'
+include 'module-core'
