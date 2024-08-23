@@ -1,49 +1,3 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.2.8'
-    id 'io.spring.dependency-management' version '1.1.6'
-}
-
-bootJar.enabled = false
-
-allprojects {
-    group = 'com'
-    version = '0.0.1-SNAPSHOT'
-
-    repositories {
-        mavenCentral()
-    }
-}
-
-subprojects {
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
-    }
-
-    apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
-
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
-
-    dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    }
-
-    tasks.named('test') {
-        useJUnitPlatform()
-    }
-
-}
-
 // module core에 module-api, module-stream이 의존
 project(':module-api') {
     dependencies {
@@ -56,4 +10,3 @@ project(':module-stream') {
         implementation(project(':module-core'))
     }
 }
-
