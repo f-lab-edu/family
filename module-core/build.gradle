@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+bootJar.enabled = false // 실행 가능한 jar 파일 생성
+jar.enabled = true // 컴파일된 클래스 파일만 포함된 jar 파일 생성
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
