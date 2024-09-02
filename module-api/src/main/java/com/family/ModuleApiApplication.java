@@ -1,4 +1,4 @@
-package com.moduleapi;
+package com.family;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
