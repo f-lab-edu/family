@@ -27,32 +27,40 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Gradle Caching
-        uses: actions/cache@v3
+#      - name: Gradle Caching
+#        uses: actions/cache@v3
+#        with:
+#          path: |
+#            ~/.gradle/caches
+#            ~/.gradle/wrapper
+#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#          restore-keys: |
+#            ${{ runner.os }}-gradle-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
 
       # gradle 실행 허가
-      - name: Run chmod to make gradlew executable
-        run: chmod +x ./gradlew
+#      - name: Run chmod to make gradlew executable
+#        run: chmod +x ./gradlew
 
-      - name: 빌드 진행
-        run: ./gradlew build -x test
+#      - name: 빌드 진행
+#        run: ./gradlew build -x test
 
       - name: 테스트 코드 실행
         run: ./gradlew --info test
 
       - name: 테스트 결과 PR에 코멘트 작성
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()  # 테스트가 실패했을때만 or 테스트가 성공했을때만 알려주기(여기선 둘다!)
+        if: always()  # 테스트가 실패했을때만 or 테스트가 성공했을때만 알려주기
         with:
           files: |
             **/build/test-results/**/*.xml
+          comment_mode: 'failures'
 
       # Files changed에서 어디에서 잘못되었는지 가르쳐준다.
       - name: Publish Test Report
