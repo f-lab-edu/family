@@ -27,29 +27,13 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-#      - name: Gradle Caching
-#        uses: actions/cache@v3
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-#          restore-keys: |
-#            ${{ runner.os }}-gradle-
-
+        # 캐싱 포함
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           build-scan-publish: true
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
-
-      # gradle 실행 허가
-#      - name: Run chmod to make gradlew executable
-#        run: chmod +x ./gradlew
-
-#      - name: 빌드 진행
-#        run: ./gradlew build -x test
 
       - name: 테스트 코드 실행
         run: ./gradlew --info test
