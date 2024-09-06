@@ -13,7 +13,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionInfo registerQuestion(QuestionCommand.RegisterQuestion command) {
-        Question initQuestion = command.toEntity();
+        String questionToken = "questionToken";
+        Question initQuestion = command.toEntity(questionToken);
         questionMap.put("token", initQuestion);
         return new QuestionInfo(initQuestion);
     }

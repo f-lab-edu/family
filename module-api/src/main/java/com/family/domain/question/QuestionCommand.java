@@ -12,8 +12,9 @@ public class QuestionCommand {
         private final String content;
         private final Question.QuestionType questionType;
 
-        public Question toEntity() {
+        public Question toEntity(String questionToken) {
             return Question.builder()
+                    .questionToken(questionToken)
                     .content(content)
                     .questionType(questionType)
                     .build();
