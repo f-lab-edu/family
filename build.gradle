@@ -1,12 +1,1 @@
-// module core에 module-api, module-stream이 의존
-project(':module-api') {
-    dependencies {
-        implementation(project(':module-core'))
-    }
-}
-
-project(':module-stream') {
-    dependencies {
-        implementation(project(':module-core'))
-    }
-}
+group = 'com.family'
